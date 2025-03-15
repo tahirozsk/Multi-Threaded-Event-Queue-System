@@ -122,20 +122,14 @@ void processSummation(Event e) {
 
     string startStr = e.instructions.substr(0, spacePos);
     string endStr = e.instructions.substr(spacePos + 1);
-
-    int start = 0, end = 0;
-    for (char c : startStr) {
-        start = start * 10 + (c - '0');
-    }
-    for (char c : endStr) {
-        end = end * 10 + (c - '0');
-    }
-
+    
+    int start = stoi(startStr);
+    int end = stoi(endStr);
+    
     long long sum = 0;
     for (int i = start; i <= end; i++) {
         sum += i;
     }
-
     lock_guard<mutex> lock(consoleMutex);
     cout << "Event " << e.id << " (SUMMATION): Sum from " << start 
          << " to " << end << " = " << sum << endl;
